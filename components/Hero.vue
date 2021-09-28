@@ -17,6 +17,6 @@ export default {
 <style lang="scss" scoped>
    .hero {
       height: 455px;
-      background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('../assets/imgs/movieHero.jpg');
+      background-image: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%)), url('../assets/imgs/cinema1.jpg');
    }
 </style>
