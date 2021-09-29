@@ -9,6 +9,9 @@
 			<button v-show="searchInput !== ''" @click="clearSearch" class="text-white bg-red-600 p-2 rounded-r-md"><span class="text-sm">Limpiar Búsqueda</span></button>
 		</div>
 
+		<!-- Loading -->
+		<Loading v-if="$fetchState.pending"/>
+
 		<!-- Movies -->
 		<div class="container mx-auto movies px-8 py-4">
 			<!-- Search Results -->
@@ -55,7 +58,7 @@
 					<div class="info mt-auto text-center">
 						<p class="title mt-2.5 text-white text-lg">{{movie.title.slice(0, 25)}} <span v-if="movie.title.length > 25">...</span> </p>
 						<p class="release mt-1 mb-4 text-gray-400">
-							Released:
+							Estreno:
 							{{
 								new Date(movie.release_date).toLocaleString('es-es', {
 									month: 'long',
@@ -77,7 +80,23 @@
 <script>
 export default {
 	name: 'home',
-
+	head(){
+		return {
+			title: 'Movie App - Ahora en Streaming',
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: 'Obten las últimas películas en cine y streaming'
+				},
+				{
+					hid: 'keywords',
+					name: 'keywords',
+					content: 'movies, películas, streaming'
+				}
+			]
+		}
+	},
 	data() {
 		return {
 			movies: [],
@@ -95,17 +114,18 @@ export default {
 			await this.searchMovies()
       }
 	},
+	fetchDelay: 1000,
 	methods: {
 		async getMovies() {
 			const data = this.$axios.get(
-				`https://api.themoviedb.org/3/movie/now_playing?api_key=37ed43a4f8eaa2abd75f9283692947bc&language=es-ES&page=1`
+				`https://api.themoviedb.org/3/movie/now_playing?api_key=52366e550def9f544fe0d4ce80659837&language=es-ES&page=1`
 			)
 			const result = await data
 			this.movies = result.data.results
 		},
 		async searchMovies() {
 			const data = this.$axios.get(
-				`https://api.themoviedb.org/3/search/movie?api_key=37ed43a4f8eaa2abd75f9283692947bc&language=es-ES&page=1&query=${this.searchInput}`
+				`https://api.themoviedb.org/3/search/movie?api_key=52366e550def9f544fe0d4ce80659837&language=es-ES&page=1&query=${this.searchInput}`
 			)
 			const result = await data
 			this.searchedMovies = result.data.results
@@ -119,6 +139,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	.loading {
+		padding-top: 120px;
+		align-items: flex-start;
+	}
 	.movie-img {
 		&:hover {
 			.overview {
