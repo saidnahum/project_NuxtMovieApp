@@ -45,7 +45,7 @@
 			</div>
 
 			<!-- Now Streaming  -->
-			<div id="movie-grid grid" v-else class="my-10 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+			<div id="movie-grid" v-else class="my-10 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
 				<div v-for="(movie, index) in movies" :key="index" class="movie relative flex flex-col">
 					<div class="movie-img relative overflow-hidden">
 						<img 
